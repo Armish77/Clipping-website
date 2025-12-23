@@ -2,13 +2,14 @@ import whisper
 import subprocess
 import os
 
-# use a light model for free servers
-model = whisper.load_model("base")
-
 def add_captions(input_video, output_video):
     """
-    Generates captions and burns them into the video
+    Generates captions using Whisper (lazy-loaded)
     """
+
+    # 🔹 Load model ONLY when function is called
+    model = whisper.load_model("tiny")
+
     audio_file = "temp_audio.wav"
 
     subprocess.run(
@@ -23,7 +24,7 @@ def add_captions(input_video, output_video):
     )
 
     result = model.transcribe(audio_file)
-    text = result["text"]
+    text = result["text"].replace("'", "").replace('"', "")
 
     os.remove(audio_file)
 
@@ -34,9 +35,9 @@ def add_captions(input_video, output_video):
             "-vf",
             f"drawtext=text='{text}':"
             "fontcolor=white:fontsize=36:"
-            "box=1:boxcolor=black@0.5:"
+            "box=1:boxcolor=black@0.6:"
             "x=(w-text_w)/2:y=h-120",
             output_video
         ],
         check=True
-  )
+    )
