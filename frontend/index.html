@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpusClip Personal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>OpusClip – Personal</h2>
+    <p>Paste a video link (30–40 minutes supported)</p>
+
+    <input
+      type="text"
+      id="videoUrl"
+      placeholder="Paste video URL here"
+    />
+
+    <button onclick="processVideo()">Generate Clips</button>
+
+    <div id="status"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
